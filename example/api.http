@@ -1,0 +1,11 @@
+POST http://localhost:3000/users/6983f32a-59d7-4bbc-8475-1cbecea87f1f?ref=json
+Content-Type: application/json
+
+{
+    "name": "John",
+    "age": 30,
+    "email": "john@example.com"
+}
+
+###
+GET http://localhost:3000/users/6983f32a-59d7-4bbc-8475-1cbecea87f1f
