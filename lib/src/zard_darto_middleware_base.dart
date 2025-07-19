@@ -1,12 +1,16 @@
 import 'package:darto/darto.dart';
 import 'package:zard/zard.dart';
 
+typedef NextFunction = void Function([Exception error]);
+typedef Middleware = dynamic Function(
+    Request req, Response res, NextFunction next);
+
 Middleware validateRequest({
   Schema? body,
   Schema? query,
-  Schema? params,
+  Schema? param,
 }) {
-  return (Request req, Response res, Next next) async {
+  return (Request req, Response res, NextFunction next) async {
     if (body != null) {
       final result = await body.safeParseAsync(req.body);
       if (!result.success) {
@@ -23,12 +27,12 @@ Middleware validateRequest({
       req.$query = result.data;
     }
 
-    if (params != null) {
-      final result = await params.safeParseAsync(req.params);
+    if (param != null) {
+      final result = await param.safeParseAsync(req.param);
       if (!result.success) {
         return sendError('Params', result.error!.format(), res);
       }
-      req.$params = result.data;
+      req.$param = result.data;
     }
 
     return next();
@@ -38,10 +42,10 @@ Middleware validateRequest({
 Middleware validateRequestBody(Schema body) => validateRequest(body: body);
 Middleware validateRequestQuery(Schema query) => validateRequest(query: query);
 Middleware validateRequestParams(Schema params) =>
-    validateRequest(params: params);
+    validateRequest(param: params);
 
 void sendError(String type, List errors, Response res) {
-  return res.status(BAD_REQUEST).json({
+  res.status(404).json({
     'type': type,
     'errors': errors,
   });
@@ -54,6 +58,6 @@ extension ValidatedRequest on Request {
   dynamic get $query => context['validatedQuery'];
   set $query(dynamic value) => context['validatedQuery'] = value;
 
-  dynamic get $params => context['validatedParams'];
-  set $params(dynamic value) => context['validatedParams'] = value;
+  dynamic get $param => context['validatedParams'];
+  set $param(dynamic value) => context['validatedParams'] = value;
 }

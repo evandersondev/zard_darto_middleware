@@ -23,7 +23,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  zard_darto_middleware: ^0.0.1
+  zard_darto_middleware: ^0.0.2
 ```
 
 or via terminal:

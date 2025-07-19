@@ -1,6 +1,5 @@
 import 'package:darto/darto.dart';
 import 'package:zard/zard.dart';
-
 import 'package:zard_darto_middleware/zard_darto_middleware.dart';
 
 void main() {
@@ -21,12 +20,12 @@ void main() {
     validateRequest(
       body: userBodySchema,
       query: userQuerySchema,
-      params: userParamSchema,
+      param: userParamSchema,
     ),
     (Request req, Response res) {
       final body = req.$body;
       final query = req.$query;
-      final params = req.$params;
+      final params = req.$param;
 
       res.json({
         'message': 'Validation passed',
@@ -41,7 +40,7 @@ void main() {
     Request req,
     Response res,
   ) {
-    final id = req.$params['id'];
+    final id = req.$param['id'];
     res.json({'message': 'Validation passed', 'params': id});
   });
 
