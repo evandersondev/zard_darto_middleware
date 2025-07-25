@@ -1,9 +1,5 @@
-import 'package:darto/darto.dart';
+import 'package:darto_types/darto_types.dart';
 import 'package:zard/zard.dart';
-
-typedef NextFunction = void Function([Exception error]);
-typedef Middleware = dynamic Function(
-    Request req, Response res, NextFunction next);
 
 Middleware validateRequest({
   Schema? body,

@@ -1,13 +1,13 @@
 name: zard_darto_middleware
 description: Validation middleware for Darto using Zard.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/evandersondev/zard_darto_middleware
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  darto: ^0.0.27
+  darto_types: ^0.0.1
   zard: ^0.0.17
 
 dev_dependencies:
